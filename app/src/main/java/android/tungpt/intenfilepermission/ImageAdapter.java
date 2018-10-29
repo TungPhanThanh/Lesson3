@@ -13,12 +13,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
-    Context mContext;
-    ArrayList<ModelImage> mModelImages;
+    private Context mContext;
+    private ArrayList<ModelImage> mImages;
 
-    public ImageAdapter(Context context, ArrayList<ModelImage> modelImages) {
+    public ImageAdapter(Context context, ArrayList<ModelImage> images) {
         this.mContext = context;
-        this.mModelImages = modelImages;
+        this.mImages = images;
     }
 
     @NonNull
@@ -32,7 +32,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        ModelImage modelImages = mModelImages.get(i);
+        ModelImage modelImages = mImages.get(i);
         Picasso.with(mContext)
                 .load(modelImages.getUri())
                 .placeholder(R.mipmap.ic_launcher)
@@ -41,7 +41,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return mModelImages != null ? mModelImages.size() : 0;
+        return mImages != null ? mImages.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -10,7 +10,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         checkPermission();
         initView();
-        Log.d("MainActivity", Environment.getExternalStorageDirectory().getAbsolutePath());
     }
 
     private void checkPermission() {
@@ -39,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        final RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        RecyclerView recyclerViewImages = findViewById(R.id.recycler_view);
         ArrayList<ModelImage> modelImages = getData();
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerViewImages.setLayoutManager(new GridLayoutManager(this, 2));
         ImageAdapter imageAdapter = new ImageAdapter(this, modelImages);
-        recyclerView.setAdapter(imageAdapter);
+        recyclerViewImages.setAdapter(imageAdapter);
     }
 
     private ArrayList<ModelImage> getData() {
@@ -62,5 +60,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return modelImages;
     }
-
 }
