@@ -12,9 +12,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String[] MODIFIER = {".jpg",".jpeg",".png"};
     private static final int READ_EXTERNAL_STORAGE = 1;
 
     @Override
@@ -50,7 +52,16 @@ public class MainActivity extends AppCompatActivity {
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         ModelImage modelImage;
         if (downloadsFolder.exists()) {
-            File[] files = downloadsFolder.listFiles();
+            final File[] files = downloadsFolder.listFiles(new FileFilter() {
+                @Override
+                public boolean accept(File pathname) {
+                    for (String modifier : MODIFIER){
+                        if (pathname.getName().toLowerCase().endsWith(modifier))
+                        return true;
+                }
+                    return false;
+                }
+            });
             for (int i = 0; i < files.length; i++) {
                 File file = files[i];
                 modelImage = new ModelImage();
